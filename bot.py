@@ -6,15 +6,9 @@ from bs4 import BeautifulSoup
 from telegram import Update, Bot
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-# Disable SSL warning
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# 🔑 YOUR DETAILS
-TOKEN = "8762641118:AAHXyGee66RV8KCQLd7WvK9JXxV7F9whNtM"
-CHAT_ID = 7912675199
-URL = "https://spsc.sikkim.gov.in/Advertisement.html"
 
-# 🔍 Fetch jobs
+
 def get_jobs():
     res = requests.get(URL, verify=False)
     soup = BeautifulSoup(res.text, "html.parser")
@@ -77,8 +71,7 @@ async def auto_check():
 
         await asyncio.sleep(1800)  # 30 min
 
-# 🚀 Start auto checker after bot starts
-async def post_init(app):
+
     asyncio.create_task(auto_check())
 
 # 🚀 Main bot setup
